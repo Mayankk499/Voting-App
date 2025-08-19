@@ -1,12 +1,17 @@
 const express = require('express')
 const app = express();
-// require('dotenv').config();
+const db = require('./db.js')
+require('dotenv').config();
 
 const bodyParser = require('body-parser');
-const { prototype } = require('events');
-const { log } = require('console');
 app.use(bodyParser.json());
 const PORT = process.env.PORT || 3000;
+
+const userRoutes = require("./routes/userRoutes.js");
+const candidateRoutes = require("./routes/candidateRoutes.js");
+
+app.use("/user", userRoutes);
+app.use("/candidate",candidateRoutes);
 
 app.listen(PORT, () => {
     console.log(`server is listening on port ${PORT}`);

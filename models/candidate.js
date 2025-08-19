@@ -1,7 +1,5 @@
 const mongoose = require("mongoose");
-const { type } = require("os");
-const { boolean } = require("webidl-conversions");
-// const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
 
 const candidateSchema = new mongoose.Schema({
   name: {
