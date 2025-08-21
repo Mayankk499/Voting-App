@@ -117,18 +117,29 @@ router.post("/vote/:candidateId", jwtAuthMiddleware, async (req, res) => {
 
 router.get("/vote/count", async (req, res) => {
   try {
-    const candidate = await Candidate.find().sort({voteCount: 'descending'});
+    const candidate = await Candidate.find().sort({ voteCount: "descending" });
 
     const voteRecord = candidate.map((data) => {
-        return{
-            party: data.party,
-            count: data.voteCount
-        }
-    })
+      return {
+        party: data.party,
+        count: data.voteCount,
+      };
+    });
     return res.status(200).json(voteRecord);
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "internal server error" });
+  }
+});
+
+router.get("/", async (req, res) => {
+  try {
+    const candidates = await Candidate.find({}, "name party -_id");
+
+    res.status(200).json(candidates);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 

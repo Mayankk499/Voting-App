@@ -84,13 +84,4 @@ router.put("/profile/password", async (req, res) => {
   }
 });
 
-router.get('/candidate', async (req, res)=> {
-  try {
-    //  list of candidates
-    
-  } catch (error) {
-    
-  }
-})
-
 module.exports = router;
